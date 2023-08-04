@@ -8,7 +8,7 @@ class QuerybydateController extends SiteController {
 	// the extension instance
 	public $extension;
 
-	protected $secretKey = "SBomhvdhDnDb1pjTZMeG1k4hJhAOxuKQ";
+	protected $secretKey = "";
 
 	protected $requiredArgs = [
 		"secret",
