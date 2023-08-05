@@ -21,8 +21,6 @@ class QuerybydateController extends SiteController {
 	 * Common settings
 	 */
 	public function actionIndex() {
-		// example url
-		// https://m.cashify.team/index.php/listaddsub?secret=[SECRET]&list_uid=[LIST_UID]&from_date=2023-22-22&to_date=2323-22-11
 
 		foreach ( $this->requiredArgs as $args ) {
 			if ( ! isset( $_GET[ $args ] ) ) {
@@ -42,7 +40,7 @@ class QuerybydateController extends SiteController {
 		}
 
 		$table_name = Yii::app()->db->tablePrefix . 'list_subscriber';
-		$list_id = $getList['list_id'];
+		$list_id    = $getList['list_id'];
 		$from_date  = $_GET['from_date'];
 		$to_date    = $_GET['to_date'];
 
@@ -52,7 +50,9 @@ class QuerybydateController extends SiteController {
 			':to_date' => $to_date,
 		] )->queryAll();
 
-		var_dump( count($allSubscribers) );
-
+		$this->renderJson( [
+			'status' => 'success',
+			'data'   => [ 'numberOfSubscribers' => count( $allSubscribers ) ]
+		] );
 	}
 }
