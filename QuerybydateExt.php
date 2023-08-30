@@ -13,10 +13,10 @@
 class QuerybydateExt extends ExtensionInit
 {
     // name of the extension as shown in the backend panel
-    public $name = 'Query By Date';
+    public $name = 'API extension';
 
     // description of the extension as shown in backend panel
-    public $description = 'This extension enables querying between dates ';
+    public $description = 'Enables querying subscribers between dates, loading multiple campaigns with one API call';
 
     // current version of this extension
     public $version = '1.0';
@@ -107,6 +107,14 @@ class QuerybydateExt extends ExtensionInit
 		    ];
 		    Yii::app()->urlManager->addRules( [
 			    [ 'querybydate/index', 'pattern' => 'getsubscribersbydate/*' ],
+		    ] );
+
+            Yii::app()->controllerMap['getcampaigns'] = [
+			    'class'     => 'ext-querybydate.frontend.controllers.GetCampaignsController',
+			    'extension' => $this,
+		    ];
+		    Yii::app()->urlManager->addRules( [
+			    [ 'getcampaigns/index', 'pattern' => 'getcampaignsbyuid/*' ],
 		    ] );
 	    }
 

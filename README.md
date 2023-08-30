@@ -1,5 +1,4 @@
 # QueryByDate MailWizz extension
-## _The Last Markdown Editor, Ever_
 
 Example url
 
