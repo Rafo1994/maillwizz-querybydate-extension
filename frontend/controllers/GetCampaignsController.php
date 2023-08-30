@@ -9,9 +9,11 @@ class GetCampaignsController extends SiteController
     // the extension instance
     public $extension;
 
-    protected $secretKey = "";
+    protected string $secretKey = ""; // Add your custom secret key
 
-    protected $requiredArgs = [
+    protected int $user_id = 2; // We are using only one user and this is his ID
+
+    protected array $requiredArgs = [
         'secret',
         'campaign_uid',
     ];
@@ -56,7 +58,7 @@ class GetCampaignsController extends SiteController
         foreach ($campaigns_uid as $campaign_uid) {
             $campaign = $this->loadCampaignByUid($campaign_uid);
             if (empty($campaign)) {
-                $data[$campaign_uid] = false;
+                $data[$campaign_uid] = "nema";
                 continue;
             }
 
@@ -102,7 +104,7 @@ class GetCampaignsController extends SiteController
     {
         $criteria = new CDbCriteria();
         $criteria->compare('campaign_uid', $campaign_uid);
-        $criteria->compare('customer_id', (int)user()->getId());
+        $criteria->compare('customer_id', $this->user_id);
         $criteria->addNotInCondition('status', [Campaign::STATUS_PENDING_DELETE]);
 
         /** @var Campaign|null $model */
